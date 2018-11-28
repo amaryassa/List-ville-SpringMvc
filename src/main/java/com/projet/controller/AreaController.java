@@ -38,11 +38,18 @@ public class AreaController {
 	        return "pageArea";
 	    }
 	
+	
+	  
 	  @RequestMapping(value="/area1", method = RequestMethod.GET, headers="Accept=application/json")
-	    public ResponseEntity<List<Area>> recupererListePaysApi(ModelMap map) {
-	    	List<Area> listeArea = areaService.recupererListeArea();
+	    public ResponseEntity<AffichageForRest> recupererListeAreaApi(ModelMap map) {
+		  List<Area> listeArea = areaService.recupererListeArea();
+	    	Long numberTotalArea = areaService.totalArea();
+	    	Long count =  numberTotalArea;
 	    	
-	    	return new ResponseEntity<List<Area>>(listeArea, HttpStatus.OK);
+	    	AffichageForRest affichageForRest = new AffichageForRest(); 
+	    	affichageForRest.setTotalPage(count);
+	    	affichageForRest.setResultList(listeArea);
+	    	return new ResponseEntity<AffichageForRest>(affichageForRest, HttpStatus.OK);
 	    }
 
 

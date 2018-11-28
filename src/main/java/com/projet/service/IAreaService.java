@@ -6,4 +6,5 @@ import com.projet.model.Area;
 
 public interface IAreaService {
 	public List<Area> recupererListeArea();
+	public Long  totalArea();
 }

@@ -6,4 +6,5 @@ import com.projet.model.Area;
 
 public interface IAreaDAO {
 	public List<Area> recupererListeArea();
+	public Long  totalArea();
 }

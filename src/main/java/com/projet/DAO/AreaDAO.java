@@ -2,6 +2,7 @@ package com.projet.DAO;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,5 +23,16 @@ private SessionFactory sessionFactory;
 		  List<Area> areaList = session.createQuery("from Area").list();
 	        return areaList;
 	}
+    
+    @Transactional(readOnly=true)
+  	public Long totalArea() {
+  		Session session = sessionFactory.getCurrentSession();
+          String countQ = "Select count (f.id) from Area f";
+          Query countQuery = session.createQuery(countQ);
+          Long countResults = (Long) countQuery.uniqueResult();
+          
+//          System.out.println(countResults);
+          return countResults;
+  	}
 
 }

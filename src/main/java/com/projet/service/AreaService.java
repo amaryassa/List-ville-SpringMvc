@@ -30,4 +30,9 @@ public class AreaService implements IAreaService{
         return areaList;
 	}
 
+
+	public Long totalArea() {
+		Long numberTotal = areaDao.totalArea();
+		return numberTotal;
+	}
 }

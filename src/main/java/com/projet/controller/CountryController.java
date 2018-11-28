@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projet.model.Area;
@@ -37,17 +38,29 @@ public class CountryController {
     
     @RequestMapping(value="/country", method = RequestMethod.GET)
     public String recupererListePays(ModelMap map) {
-    	List<Country> listePays = countryService.recupererListePays();
+    	List<Country> listePays = countryService.recupererListePays(0, 20);
     	
         map.addAttribute("listCountry", listePays);
         return "pagePays";
     }
     
     @RequestMapping(value="/country1", method = RequestMethod.GET, headers="Accept=application/json")
-    public ResponseEntity<List<Country>> recupererListePaysApi(ModelMap map) {
-    	List<Country> listePays = countryService.recupererListePays();
+    public ResponseEntity<AffichageForRest> recupererListePaysApi(
+    		@RequestParam(required=false, defaultValue="0") int page,
+    		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	
-    	return new ResponseEntity<List<Country>>(listePays, HttpStatus.OK);
+    	List<Country> listePays = countryService.recupererListePays(page, size);
+    	Long numberTotalElements = countryService.totalPays();
+    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+    	
+    	AffichageForRest affichageForRest = new AffichageForRest(); 
+    	affichageForRest.setTotalElements(numberTotalElements);
+    	affichageForRest.setPage(page);
+    	affichageForRest.setSize(size);
+    	affichageForRest.setLastPage(lastPage);
+    	affichageForRest.setResultList(listePays);
+    	
+    	return new ResponseEntity<AffichageForRest>(affichageForRest, HttpStatus.OK);
     }
 
     
