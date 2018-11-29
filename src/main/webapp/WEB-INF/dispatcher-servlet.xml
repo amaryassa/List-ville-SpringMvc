@@ -19,13 +19,13 @@
         <property name="defaultEncoding" value="ISO-8859-1" />
     </bean>
     
-    <!-- Choix de la langue par défaut : fr pour Français, en pour Anglais, ... -->
+    <!-- Choix de la langue par dÃ©faut : fr pour FranÃ§ais, en pour Anglais, ... -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="fr" />
 	</bean>
 
-	<!-- Ajout du paramètre ?language=fr ou ?language=en, ... au niveau de l'URL pour le choix de la langue -->
+	<!-- Ajout du paramÃ¨tre ?language=fr ou ?language=en, ... au niveau de l'URL pour le choix de la langue -->
 	<bean id="localeChangeInterceptor"
 		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="language" />
@@ -94,4 +94,5 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     <mvc:annotation-driven />
+   
 </beans>
