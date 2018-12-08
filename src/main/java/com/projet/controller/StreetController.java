@@ -13,42 +13,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.projet.model.Area;
-import com.projet.model.Country;
-import com.projet.service.ICountryService;
+import com.projet.model.Street;
+import com.projet.service.IStreetService;
+
+
 
 @Controller
-public class CountryController {
+public class StreetController {
 	
-    private ICountryService countryService;
-		
-    public ICountryService getCountryService() {
-		return countryService;
+	 private IStreetService streetService;
+
+	public IStreetService getStreetService() {
+		return streetService;
 	}
-    
-    @Autowired(required=true)
-    @Qualifier(value="countryService")
-	public void setCountryService(ICountryService countryService) {
-		this.countryService = countryService;
+	@Autowired(required=true)
+    @Qualifier(value="streetService")
+	public void setStreetService(IStreetService streetService) {
+		this.streetService = streetService;
 	}
-    
-    @RequestMapping(value="/country", method = RequestMethod.GET)
-    public String recupererListePays(
+	
+	
+	
+	@RequestMapping(value="/street", method = RequestMethod.GET)
+    public String recupererListeStreet(
     		@RequestParam(required=false, defaultValue="0") int page,
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-    	List<Country> listePays = countryService.recupererListePays(page, size);
+    	List<Street> listeStreet = streetService.recupererListeStreet(page, size);
     	
-        map.addAttribute("listCountry", listePays);
-        return "pagePays";
+    	
+        map.addAttribute("listStreet", listeStreet);
+        return "pageStreet";
     }
     @ResponseBody
-    @RequestMapping(value="/country1", method = RequestMethod.GET, headers="Accept=application/json;")
+    @RequestMapping(value="/street1", method = RequestMethod.GET, headers="Accept=application/json;")
     public ResponseEntity<AffichageForRest> recupererListePaysApi(
 		@RequestParam(required=false, defaultValue="0") int page,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
 	
-    	List<Country> listePays = countryService.recupererListePays(page, size);
-    	Long numberTotalElements = countryService.totalPays();
+    	List<Street> listePays = streetService.recupererListeStreet(page, size);
+    	Long numberTotalElements = streetService.totalStreet();
     	int lastPage = (int) (Math.ceil(numberTotalElements / size));
     	double testLastPage= (double)numberTotalElements / (double)size;
     	if(lastPage==testLastPage) {
@@ -64,4 +67,6 @@ public class CountryController {
     	
     	return new ResponseEntity<AffichageForRest>(affichageForRest, HttpStatus.OK);
     }
+		
+	  
 }

@@ -30,7 +30,7 @@ public class CountryService implements ICountryService {
 
 		return listCountry;		
 	}
-
+	@Transactional(readOnly=true)
 	public Long totalPays() {
 		Long numberTotal = countryDao.totalPays();
 		return numberTotal;

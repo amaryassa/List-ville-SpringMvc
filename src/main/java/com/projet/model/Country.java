@@ -21,7 +21,7 @@ public class Country {
 	    private String codeIso;
 	    
 	    
-	    @OneToMany(mappedBy="idCountry", fetch=FetchType.LAZY) //le lazy: quand je demande de charger une categorie il va charger que les information id et nomCategorie sans les Produits sauf à la demande
+	    @OneToMany(mappedBy="AreaCountry", fetch=FetchType.LAZY) //le lazy: quand je demande de charger une categorie il va charger que les information id et nomCategorie sans les Produits sauf à la demande
 		private Collection<Area> area;
 	    
 	    

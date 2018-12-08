@@ -30,9 +30,6 @@ private SessionFactory sessionFactory;
           String countQ = "Select count (f.id) from Area f";
           Query countQuery = session.createQuery(countQ);
           Long countResults = (Long) countQuery.uniqueResult();
-          
-//          System.out.println(countResults);
           return countResults;
   	}
-
 }

@@ -68,6 +68,8 @@
             <list>
                 <value>com.projet.model.Country</value>
                 <value>com.projet.model.Area</value>
+                <value>com.projet.model.City</value>
+                 <value>com.projet.model.Street</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -81,18 +83,44 @@
     <bean id="countryService" class="com.projet.service.CountryService">
         <property name="countryDao" ref="countryDao"/>
     </bean>
-    
-    <bean id="countryDao" class="com.projet.DAO.CountryDAO">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
+     
     <bean id="areaService" class="com.projet.service.AreaService">
         <property name="areaDao" ref="areaDao"/>
     </bean>
     
+    <bean id="cityService" class="com.projet.service.CityService">
+        <property name="cityDao" ref="cityDao"/>
+    </bean>
+    
+      <bean id="streetService" class="com.projet.service.StreetService">
+        <property name="streetDao" ref="streetDao"/>
+    </bean>
+    
+    
+    
+    
+    
+    
+    <bean id="countryDao" class="com.projet.DAO.CountryDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+   
+    
     <bean id="areaDao" class="com.projet.DAO.AreaDAO">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
+      <bean id="cityDao" class="com.projet.DAO.CityDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+     <bean id="streetDao" class="com.projet.DAO.StreetDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+   
+   
+   
+   
     <mvc:annotation-driven />
    
 </beans>

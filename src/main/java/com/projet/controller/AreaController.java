@@ -40,9 +40,6 @@ public class AreaController {
 	        map.addAttribute("listeArea", listeArea);
 	        return "pageArea";
 	    }
-	
-	
-	  
 	  @RequestMapping(value="/area1", method = RequestMethod.GET, headers="Accept=application/json")
 	    public ResponseEntity<AffichageForRest> recupererListeAreaApi(
 	    @RequestParam(required=false, defaultValue="0") int page,
@@ -50,8 +47,6 @@ public class AreaController {
 		  List<Area> listeArea = areaService.recupererListeArea();
 	    	Long numberTotalElements = areaService.totalArea();
 	    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
-	    	
-	    	
 	    	AffichageForRest affichageForRest = new AffichageForRest(); 
 	    	affichageForRest.setTotalElements(numberTotalElements);
 	    	affichageForRest.setPage(page);
@@ -60,6 +55,4 @@ public class AreaController {
 	    	affichageForRest.setResultList(listeArea);
 	    	return new ResponseEntity<AffichageForRest>(affichageForRest, HttpStatus.OK);
 	    }
-
-
 }
