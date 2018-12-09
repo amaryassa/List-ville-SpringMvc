@@ -19,9 +19,12 @@ public class Area {
     @Id
     @Column(name="ID_AREA", nullable=false)
     private int idArea;
-
-    @Column(name="LANGUAGE_ID")
-    private int languageId;
+    
+    
+    
+    @ManyToOne
+	@JoinColumn(name="LANGUAGE_ID")
+	private Language AreaLanguage;
     
     @Column(name="AREA_LABEL")
     private String areaLabel;
@@ -46,12 +49,12 @@ public class Area {
 		this.idArea = idArea;
 	}
 
-	public int getLanguageId() {
-		return languageId;
+	public Language getAreaLanguage() {
+		return AreaLanguage;
 	}
 
-	public void setLanguageId(int languageId) {
-		this.languageId = languageId;
+	public void setAreaLanguage(Language areaLanguage) {
+		AreaLanguage = areaLanguage;
 	}
 
 	public String getAreaLabel() {

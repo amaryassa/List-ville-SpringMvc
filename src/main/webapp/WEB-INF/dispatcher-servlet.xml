@@ -70,6 +70,7 @@
                 <value>com.projet.model.Area</value>
                 <value>com.projet.model.City</value>
                  <value>com.projet.model.Street</value>
+                  <value>com.projet.model.Language</value>
             </list>
         </property>
         <property name="hibernateProperties">
