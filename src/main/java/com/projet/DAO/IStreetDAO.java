@@ -5,6 +5,6 @@ import java.util.List;
 import com.projet.model.Street;
 
 public interface IStreetDAO {
-	public List<Street> recupererListeStreet(int page, int size);
-	public Long  totalStreet();
+	public List<Street> recupererListeStreet(int page, int size, String motCle);
+	public Long  totalStreet(String motCle);
 }

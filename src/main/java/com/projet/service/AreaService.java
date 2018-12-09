@@ -24,13 +24,13 @@ public class AreaService implements IAreaService{
 	
 	
 	@Transactional(readOnly=true)
-	public List<Area> recupererListeArea() {
-		List<Area> areaList = areaDao.recupererListeArea();
+	public List<Area> recupererListeArea(int page, int size , String motCle) {
+		List<Area> areaList = areaDao.recupererListeArea( page, size ,motCle);
         return areaList;
 	}
 	@Transactional(readOnly=true)
-	public Long totalArea() {
-		Long numberTotal = areaDao.totalArea();
+	public Long totalArea(String motCle) {
+		Long numberTotal = areaDao.totalArea(motCle);
 		return numberTotal;
 	}
 }

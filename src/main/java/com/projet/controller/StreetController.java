@@ -37,8 +37,9 @@ public class StreetController {
 	@RequestMapping(value="/street", method = RequestMethod.GET)
     public String recupererListeStreet(
     		@RequestParam(required=false, defaultValue="0") int page,
+    		@RequestParam(required=false, defaultValue="") String motCle,
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-    	List<Street> listeStreet = streetService.recupererListeStreet(page, size);
+    	List<Street> listeStreet = streetService.recupererListeStreet(page, size,motCle);
     	
     	
         map.addAttribute("listStreet", listeStreet);
@@ -48,10 +49,12 @@ public class StreetController {
     @RequestMapping(value="/street1", method = RequestMethod.GET, headers="Accept=application/json;")
     public ResponseEntity<AffichageForRest> recupererListePaysApi(
 		@RequestParam(required=false, defaultValue="0") int page,
+		@RequestParam(required=false, defaultValue="") String motCle,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
 	
-    	List<Street> listePays = streetService.recupererListeStreet(page, size);
-    	Long numberTotalElements = streetService.totalStreet();
+    	List<Street> listePays = streetService.recupererListeStreet(page, size, motCle);
+    	
+    	Long numberTotalElements = streetService.totalStreet(motCle);
     	int lastPage = (int) (Math.ceil(numberTotalElements / size));
     	double testLastPage= (double)numberTotalElements / (double)size;
     	if(lastPage==testLastPage) {

@@ -35,17 +35,19 @@ public class AreaController {
 	  @RequestMapping(value="/area", method = RequestMethod.GET)
 	    public String recupererListePays(
 	    	    @RequestParam(required=false, defaultValue="0") int page,
+	    		@RequestParam(required=false, defaultValue="") String motCle,
 	    		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-	    	List<Area> listeArea = areaService.recupererListeArea();
+	    	List<Area> listeArea = areaService.recupererListeArea(page, size,motCle);
 	        map.addAttribute("listeArea", listeArea);
 	        return "pageArea";
 	    }
 	  @RequestMapping(value="/area1", method = RequestMethod.GET, headers="Accept=application/json")
 	    public ResponseEntity<AffichageForRest> recupererListeAreaApi(
 	    @RequestParam(required=false, defaultValue="0") int page,
+		@RequestParam(required=false, defaultValue="") String motCle,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-		  List<Area> listeArea = areaService.recupererListeArea();
-	    	Long numberTotalElements = areaService.totalArea();
+		  List<Area> listeArea = areaService.recupererListeArea(page, size,motCle);
+	    	Long numberTotalElements = areaService.totalArea(motCle);
 	    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
 	    	AffichageForRest affichageForRest = new AffichageForRest(); 
 	    	affichageForRest.setTotalElements(numberTotalElements);

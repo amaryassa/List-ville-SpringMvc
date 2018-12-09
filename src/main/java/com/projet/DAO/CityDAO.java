@@ -19,16 +19,17 @@ public class CityDAO implements ICityDAO {
         this.sessionFactory = sf;
     }
     @Transactional(readOnly=true)
-	public List<City> recupererListeCity(int page, int size) {
+	public List<City> recupererListeCity(int page, int size, String motCle) {
 		Session session = sessionFactory.getCurrentSession();
-        List<City> cityList = session.createQuery("from City").setFirstResult(page).setMaxResults(size).list();
-        System.out.println("\n \n \n"+cityList+"\n\n\n");
+        List<City> cityList = session.createQuery("from City as a where a.cityName like '%"+motCle+"%'")
+        		.setFirstResult(page)
+        		.setMaxResults(size).list();
         return cityList;
 	}
     @Transactional(readOnly=true)
-	public Long totalCity() {
+	public Long totalCity(String motCle) {
     	Session session = sessionFactory.getCurrentSession();
-        String countQ = "Select count (f.id) from City f";
+        String countQ = "Select count (*) from City as a where a.cityName like '%"+motCle+"%'";
         Query countQuery = session.createQuery(countQ);
         Long countResults = (Long) countQuery.uniqueResult();
         System.out.println("\n \n \n"+countResults+"\n\n\n");

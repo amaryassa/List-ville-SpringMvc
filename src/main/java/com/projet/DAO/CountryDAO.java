@@ -18,17 +18,22 @@ public class CountryDAO implements ICountryDAO {
     }
     
     @Transactional(readOnly=true)
-	public List<Country> recupererListePays(int page, int size) {
+	public List<Country> recupererListePays(int page, int size, String motCle) {
 		Session session = sessionFactory.getCurrentSession();
-        List<Country> countryList = session.createQuery("from Country").setFirstResult(page).setMaxResults(size).list();
+//		 where country.codeIso ='ATA'
+		
+        List<Country> countryList = session.createQuery("from Country as country where country.codeIso like '%"+motCle+"%' ")
+        		.setFirstResult(page).
+        		setMaxResults(size).list();
         return countryList;
 	}
     @Transactional(readOnly=true)
-	public Long totalPays() {
+	public Long totalPays(String motCle) {
 		Session session = sessionFactory.getCurrentSession();
-        String countQ = "Select count (f.id) from Country f";
+        String countQ = "Select count (*) from Country as country where country.codeIso like '%"+motCle+"%'";
         Query countQuery = session.createQuery(countQ);
         Long countResults = (Long) countQuery.uniqueResult();
+//        System.out.println("count: "+countResults);
         return countResults;
 	}
 }

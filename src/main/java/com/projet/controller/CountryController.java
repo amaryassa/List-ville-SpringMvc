@@ -35,8 +35,10 @@ public class CountryController {
     @RequestMapping(value="/country", method = RequestMethod.GET)
     public String recupererListePays(
     		@RequestParam(required=false, defaultValue="0") int page,
+    		@RequestParam(required=false, defaultValue="") String motCle,
+    		
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-    	List<Country> listePays = countryService.recupererListePays(page, size);
+    	List<Country> listePays = countryService.recupererListePays(page, size, motCle);
     	
         map.addAttribute("listCountry", listePays);
         return "pagePays";
@@ -45,10 +47,11 @@ public class CountryController {
     @RequestMapping(value="/country1", method = RequestMethod.GET, headers="Accept=application/json;")
     public ResponseEntity<AffichageForRest> recupererListePaysApi(
 		@RequestParam(required=false, defaultValue="0") int page,
+		@RequestParam(required=false, defaultValue="") String motCle,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
 	
-    	List<Country> listePays = countryService.recupererListePays(page, size);
-    	Long numberTotalElements = countryService.totalPays();
+    	List<Country> listePays = countryService.recupererListePays(page, size, motCle);
+    	Long numberTotalElements = countryService.totalPays(motCle);
     	int lastPage = (int) (Math.ceil(numberTotalElements / size));
     	double testLastPage= (double)numberTotalElements / (double)size;
     	if(lastPage==testLastPage) {

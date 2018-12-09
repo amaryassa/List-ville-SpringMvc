@@ -18,16 +18,18 @@ private SessionFactory sessionFactory;
     }
 
     @Transactional(readOnly=true)
-	public List<Area> recupererListeArea() {
+	public List<Area> recupererListeArea(int page, int size, String motCle) {
 		Session session = sessionFactory.getCurrentSession();
-		  List<Area> areaList = session.createQuery("from Area").list();
+		  List<Area> areaList = session.createQuery("from Area as a where a.areaLabel like '%"+motCle+"%'")
+				  .setFirstResult(page).
+	        		setMaxResults(size).list();
 	        return areaList;
 	}
     
     @Transactional(readOnly=true)
-  	public Long totalArea() {
+  	public Long totalArea(String motCle) {
   		Session session = sessionFactory.getCurrentSession();
-          String countQ = "Select count (f.id) from Area f";
+          String countQ = "Select count (*) from Area as a where a.areaLabel like '%"+motCle+"%'";
           Query countQuery = session.createQuery(countQ);
           Long countResults = (Long) countQuery.uniqueResult();
           return countResults;

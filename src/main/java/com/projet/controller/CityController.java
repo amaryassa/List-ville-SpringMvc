@@ -35,8 +35,10 @@ public class CityController {
     @RequestMapping(value="/city", method = RequestMethod.GET)
     public String recupererListeCity(
     		@RequestParam(required=false, defaultValue="0") int page,
+
+    		@RequestParam(required=false, defaultValue="") String motCle,
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-    	List<City> listeCity = cityService.recupererListeCity(page, size);
+    	List<City> listeCity = cityService.recupererListeCity(page, size, motCle);
     	
         map.addAttribute("listeCity", listeCity);
         return "pageCity";
@@ -45,10 +47,11 @@ public class CityController {
     @RequestMapping(value="/city1", method = RequestMethod.GET, headers="Accept=application/json;")
     public ResponseEntity<AffichageForRest> recupererListeCityApi(
 		@RequestParam(required=false, defaultValue="0") int page,
+		@RequestParam(required=false, defaultValue="") String motCle,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
 	
-    	List<City> listePays = cityService.recupererListeCity(page, size);
-    	Long numberTotalElements = cityService.totalCity();
+    	List<City> listePays = cityService.recupererListeCity(page, size, motCle);
+    	Long numberTotalElements = cityService.totalCity(motCle);
     	int lastPage = (int) (Math.ceil(numberTotalElements / size));
     	double testLastPage= (double)numberTotalElements / (double)size;
     	if(lastPage==testLastPage) {

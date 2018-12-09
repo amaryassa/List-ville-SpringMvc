@@ -24,15 +24,15 @@ public class CountryService implements ICountryService {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<Country> recupererListePays(int page, int size){
+	public List<Country> recupererListePays(int page, int size, String motCle){
 		if(page>0) page=page*size;
-		List<Country> listCountry = countryDao.recupererListePays( page, size);
+		List<Country> listCountry = countryDao.recupererListePays( page, size, motCle);
 
 		return listCountry;		
 	}
 	@Transactional(readOnly=true)
-	public Long totalPays() {
-		Long numberTotal = countryDao.totalPays();
+	public Long totalPays(String motCle) {
+		Long numberTotal = countryDao.totalPays(motCle);
 		return numberTotal;
 	}
 

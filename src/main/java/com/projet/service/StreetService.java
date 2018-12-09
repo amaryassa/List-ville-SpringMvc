@@ -24,15 +24,15 @@ public class StreetService implements IStreetService {
 	}
 
 	@Transactional(readOnly=true)
-	public List<Street> recupererListeStreet(int page, int size) {
+	public List<Street> recupererListeStreet(int page, int size, String motCle) {
 		if(page>0) page=page*size;
-		List<Street> listStreet = streetDao.recupererListeStreet( page, size);
+		List<Street> listStreet = streetDao.recupererListeStreet( page, size,  motCle);
 
 		return listStreet;		
 	}
 	@Transactional(readOnly=true)
-	public Long totalStreet() {
-		Long numberTotal = streetDao.totalStreet();
+	public Long totalStreet(String motCle) {
+		Long numberTotal = streetDao.totalStreet(motCle);
 		return numberTotal;
 	}
 

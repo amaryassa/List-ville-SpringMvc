@@ -17,17 +17,19 @@ public class StreetDAO implements IStreetDAO {
         this.sessionFactory = sf;
         }
     @Transactional(readOnly=true)
-	public List<Street> recupererListeStreet(int page, int size) {
+	public List<Street> recupererListeStreet(int page, int size, String motCle) {
     	
     		Session session = sessionFactory.getCurrentSession();
-            List<Street> StreetList = session.createQuery("from Street").setFirstResult(page).setMaxResults(size).list();
+            List<Street> StreetList = session.createQuery("from Street as a where a.StreetNameLabel like '%"+motCle+"%'")
+            		.setFirstResult(page).
+            		setMaxResults(size).list();
             return StreetList;
 	}
     
     @Transactional(readOnly=true)
-	public Long totalStreet() {
+	public Long totalStreet(String motCle) {
     	Session session = sessionFactory.getCurrentSession();
-        String countQ = "Select count (f.id) from Street f";
+        String countQ = "Select count (*) from Street as a where a.StreetNameLabel like '%"+motCle+"%'";
         Query countQuery = session.createQuery(countQ);
         Long countResults = (Long) countQuery.uniqueResult();
         return countResults;
