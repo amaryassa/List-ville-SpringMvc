@@ -21,17 +21,14 @@ import com.projet.service.ICountryService;
 public class CountryController {
 	
     private ICountryService countryService;
-		
     public ICountryService getCountryService() {
 		return countryService;
 	}
-    
     @Autowired(required=true)
     @Qualifier(value="countryService")
 	public void setCountryService(ICountryService countryService) {
 		this.countryService = countryService;
 	}
-    
     @RequestMapping(value="/country", method = RequestMethod.GET)
     public String recupererListePays(
     		@RequestParam(required=false, defaultValue="0") int page,
@@ -39,7 +36,6 @@ public class CountryController {
     		
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	List<Country> listePays = countryService.recupererListePays(page, size, motCle);
-    	
         map.addAttribute("listCountry", listePays);
         return "pagePays";
     }
@@ -49,7 +45,6 @@ public class CountryController {
 		@RequestParam(required=false, defaultValue="0") int page,
 		@RequestParam(required=false, defaultValue="") String motCle,
 		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
-	
     	List<Country> listePays = countryService.recupererListePays(page, size, motCle);
     	Long numberTotalElements = countryService.totalPays(motCle);
     	int lastPage = (int) (Math.ceil(numberTotalElements / size));
@@ -57,14 +52,12 @@ public class CountryController {
     	if(lastPage==testLastPage) {
     		lastPage=lastPage-1;
     	}
-    	
     	AffichageForRest affichageForRest = new AffichageForRest(); 
     	affichageForRest.setTotalElements(numberTotalElements);
     	affichageForRest.setPage(page);
     	affichageForRest.setSize(size);
     	affichageForRest.setLastPage(lastPage);
     	affichageForRest.setResultList(listePays);
-    	
     	return new ResponseEntity<AffichageForRest>(affichageForRest, HttpStatus.OK);
     }
 }

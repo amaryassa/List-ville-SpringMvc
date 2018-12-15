@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.projet.model.Area;
 import com.projet.model.Country;
@@ -20,18 +21,14 @@ import com.projet.service.IAreaService;
 public class AreaController {
 //	recupération de l'interface du service
 	private IAreaService areaService;
-
 	public IAreaService getAreaService() {
 		return areaService;
 	}
-
-	
 	@Autowired(required=true)
     @Qualifier(value="areaService")
 	public void setAreaService(IAreaService areaService) {
 		this.areaService = areaService;
 	}
-	
 	  @RequestMapping(value="/area", method = RequestMethod.GET)
 	    public String recupererListePays(
 	    	    @RequestParam(required=false, defaultValue="0") int page,
@@ -41,6 +38,7 @@ public class AreaController {
 	        map.addAttribute("listeArea", listeArea);
 	        return "pageArea";
 	    }
+	  @ResponseBody
 	  @RequestMapping(value="/area1", method = RequestMethod.GET, headers="Accept=application/json")
 	    public ResponseEntity<AffichageForRest> recupererListeAreaApi(
 	    @RequestParam(required=false, defaultValue="0") int page,
@@ -49,6 +47,10 @@ public class AreaController {
 		  List<Area> listeArea = areaService.recupererListeArea(page, size,motCle);
 	    	Long numberTotalElements = areaService.totalArea(motCle);
 	    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+	    	double testLastPage= (double)numberTotalElements / (double)size;
+	    	if(lastPage==testLastPage) {
+	    		lastPage=lastPage-1;
+	    	}
 	    	AffichageForRest affichageForRest = new AffichageForRest(); 
 	    	affichageForRest.setTotalElements(numberTotalElements);
 	    	affichageForRest.setPage(page);

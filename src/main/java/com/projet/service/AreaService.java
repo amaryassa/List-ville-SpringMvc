@@ -25,6 +25,7 @@ public class AreaService implements IAreaService{
 	
 	@Transactional(readOnly=true)
 	public List<Area> recupererListeArea(int page, int size , String motCle) {
+		if(page>0) page=page*size;
 		List<Area> areaList = areaDao.recupererListeArea( page, size ,motCle);
         return areaList;
 	}

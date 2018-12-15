@@ -21,8 +21,7 @@ private SessionFactory sessionFactory;
 	public List<Area> recupererListeArea(int page, int size, String motCle) {
 		Session session = sessionFactory.getCurrentSession();
 		  List<Area> areaList = session.createQuery("from Area as a where a.areaLabel like '%"+motCle+"%'")
-				  .setFirstResult(page).
-	        		setMaxResults(size).list();
+				  .setFirstResult(page).setMaxResults(size).list();
 	        return areaList;
 	}
     
