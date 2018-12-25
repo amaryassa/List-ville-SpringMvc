@@ -35,6 +35,15 @@ public class AreaController {
 	    		@RequestParam(required=false, defaultValue="") String motCle,
 	    		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
 	    	List<Area> listeArea = areaService.recupererListeArea(page, size,motCle);
+	    	Long numberTotalElements = areaService.totalArea(motCle);
+	    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+	    	double testLastPage= (double)numberTotalElements / (double)size;
+	    	if(lastPage==testLastPage) {
+	    		lastPage=lastPage-1;
+	    	}
+	    	map.addAttribute("motCle", motCle);
+	        map.addAttribute("lastPage", lastPage);
+	        map.addAttribute("currentPage", page);
 	        map.addAttribute("listeArea", listeArea);
 	        return "pageArea";
 	    }

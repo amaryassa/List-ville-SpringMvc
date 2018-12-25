@@ -16,14 +16,43 @@
 		<title><spring:message code="pays.page.titre"/></title>
     </head>
     <body>
-    	<a href="index.jsp"><spring:message code="lien.retour.accueil"/></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">New Tech</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item ">
+        <a class="nav-link"href="./">Accueil</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="./country">Pays</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link"href="./area">Région</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link"href="./city">Ville</a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link"href="./street">Rue</a>
+      </li>
+
+
+
+    </ul>
+  </div>
+</nav>
+    
     	<div class="container spacer">
   			<div class="card">
-                <div class="card-header bg-info"> Pays</div>
+                <div class="card-header bg-primary"> Pays </div>
             <div class="  spacer">
-		    	<form:form  method="GET" action="country" >
+		    	<form:form  method="GET" action="city" >
 		    	<div class="input-group col-sm-5">
-		          <input name="motCle" type="text" class="form-control " placeholder="Recherche par code ISO"/>
+		          <input name="motCle" type="text" class="form-control " placeholder="Recherche par Ville"/>
 		          <div class="input-group-append">
 		            <button class="btn btn-secondary" type="submit">
 		              <i class="fa fa-search"></i>
@@ -35,18 +64,18 @@
 		       <div class="card-body">
 		          <table class="table table-striped">
 		            <thead>
-		                <tr>
+		                 <tr>
 		                    <th><spring:message code="pays.liste.identifiant"/></th>
 		                    <th><spring:message code="pays.liste.codeISO"/></th>
 		                </tr>
 		            </thead>
 		            <tbody>
-		                <c:forEach items="${listCountry}" var="country">
+		                  <c:forEach items="${listCountry}" var="country">
 		                    <tr>
 		                        <td><c:out value="${country.idCountry}"/></td>
 		                        <td><c:out value="${country.codeIso}"/></td>
 		                    </tr>
-		                </c:forEach>
+		                    </c:forEach>
 		            </tbody>
 		            <tfoot> 
 		         <c:if test="${lastPage>0}">

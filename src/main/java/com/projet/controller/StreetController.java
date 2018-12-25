@@ -40,9 +40,17 @@ public class StreetController {
     		@RequestParam(required=false, defaultValue="") String motCle,
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	List<Street> listeStreet = streetService.recupererListeStreet(page, size,motCle);
+    	Long numberTotalElements = streetService.totalStreet(motCle);
+    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+    	double testLastPage= (double)numberTotalElements / (double)size;
+    	if(lastPage==testLastPage) {
+    		lastPage=lastPage-1;
+    	}
     	
-    	System.out.println("JSKKKKK STREET: " +listeStreet);
     	
+    	map.addAttribute("motCle", motCle);
+        map.addAttribute("lastPage", lastPage);
+        map.addAttribute("currentPage", page);
         map.addAttribute("listStreet", listeStreet);
         return "pageStreet";
     }

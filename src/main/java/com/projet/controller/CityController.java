@@ -39,7 +39,16 @@ public class CityController {
     		@RequestParam(required=false, defaultValue="") String motCle,
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	List<City> listeCity = cityService.recupererListeCity(page, size, motCle);
+    	Long numberTotalElements = cityService.totalCity(motCle);
+    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+    	double testLastPage= (double)numberTotalElements / (double)size;
+    	if(lastPage==testLastPage) {
+    		lastPage=lastPage-1;
+    	}
     	
+    	map.addAttribute("motCle", motCle);
+        map.addAttribute("lastPage", lastPage);
+        map.addAttribute("currentPage", page);
         map.addAttribute("listeCity", listeCity);
         return "pageCity";
     }

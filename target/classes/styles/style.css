@@ -21,3 +21,36 @@ tr:hover{
   cursor: pointer;
   color: white !important;
 }
+.navbar-dark .navbar-brand {
+    color: #fff !important;
+}
+.home h1{
+  font-family: times,Times New Roman,times-roman,georgia,serif;
+  font-size: 48px;
+  line-height: 40px;
+  letter-spacing: -1px;
+  color: #444;
+  text-transform: none;
+  margin: 0 0 0 0;
+  margin-top: 50px;
+  padding: 0 0 0 0;
+  font-weight: 100;
+  text-align: center;
+}
+.home h2{
+  text-align: center;
+  margin-top: 20px;
+}
+.home p{
+  padding-left: 50px;
+}
+.home h3{
+  padding-left: 30px;
+
+  }
+  .home .dev{
+text-align: right;
+padding-right: 50px;
+
+}
+
