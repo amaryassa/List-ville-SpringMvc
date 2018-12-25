@@ -36,7 +36,16 @@ public class CountryController {
     		
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	List<Country> listePays = countryService.recupererListePays(page, size, motCle);
+    	Long numberTotalElements = countryService.totalPays(motCle);
+    	int lastPage = (int) (Math.ceil(numberTotalElements / size));
+    	double testLastPage= (double)numberTotalElements / (double)size;
+    	if(lastPage==testLastPage) {
+    		lastPage=lastPage-1;
+    	}
+    	map.addAttribute("motCle", motCle);
         map.addAttribute("listCountry", listePays);
+        map.addAttribute("lastPage", lastPage);
+        map.addAttribute("currentPage", page);
         return "pagePays";
     }
     @ResponseBody

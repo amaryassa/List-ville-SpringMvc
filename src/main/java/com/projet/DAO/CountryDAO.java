@@ -22,7 +22,7 @@ public class CountryDAO implements ICountryDAO {
 		Session session = sessionFactory.getCurrentSession();
 //		 where country.codeIso ='ATA'
 		
-        List<Country> countryList = session.createQuery("from Country as country where country.codeIso like '%"+motCle+"%' ")
+        List<Country> countryList = session.createQuery("from Country as country where country.codeIso like '%"+motCle+"%'")
         		.setFirstResult(page).
         		setMaxResults(size).list();
         return countryList;

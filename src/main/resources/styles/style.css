@@ -1,0 +1,23 @@
+.spacer{
+  margin-top: 30px;
+}
+.disabled{
+opacity: 0.65;
+cursor: not-allowed;
+color:red;
+}
+.pagination{
+  float:right;
+}
+
+.numberPagination{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+tr:hover{
+  background-color: #2fb74fde !important;
+  cursor: pointer;
+  color: white !important;
+}

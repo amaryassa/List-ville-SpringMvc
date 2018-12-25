@@ -14,19 +14,27 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th>idCity</th>
-                    <th>refcode</th>
-                    <th>cityName</th>
+                        <th> Rue</th><th> Ville</th><th>CP</th> <th>Région</th> <th>Langue</th> <th>Pays</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${listeCity}" var="city">
+                <c:forEach items="${listStreet}" var="street">
                     <tr>
-                        <td><c:out value="${city.idCity}"/></td>
-                        <td><c:out value="${city.refcode}"/></td>
-                        <td><c:out value="${city.cityName}"/></td>
+                        <td><c:out value="${street.streetNameLabel}"/></td>
+                         <td><c:out value="${street.streetCity.cityName}"/></td>
+			            <td><c:out value="${street.streetCity.idZip}"/></td>
+			            <td><c:out value="${street.streetCity.cityArea.areaLabel}"/></td>
+			            <td><c:out value="${street.streetCity.cityArea.areaLanguage.languageName}"/></td>
+			            <td><c:out value="${street.streetCity.cityArea.areaCountry.codeIso}"/></td>
                     </tr>
                 </c:forEach>
+                
+                <c:out value="${listStreet.size()}"/>
+          
+                
+                
+                
+                
             </tbody>
         </table>
     </body>

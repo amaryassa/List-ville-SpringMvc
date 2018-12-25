@@ -119,9 +119,7 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
    
-   
-   
-   
+    <mvc:resources mapping="/resources/**" location="classpath:/resources" />
     <mvc:annotation-driven />
    
 </beans>

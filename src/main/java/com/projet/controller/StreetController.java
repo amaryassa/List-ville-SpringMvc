@@ -41,6 +41,7 @@ public class StreetController {
     		@RequestParam(required=false, defaultValue="10") int size, ModelMap map) {
     	List<Street> listeStreet = streetService.recupererListeStreet(page, size,motCle);
     	
+    	System.out.println("JSKKKKK STREET: " +listeStreet);
     	
         map.addAttribute("listStreet", listeStreet);
         return "pageStreet";
