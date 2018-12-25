@@ -1,5 +1,7 @@
 # List-ville-SpringMvc
 
+* Petit Projet **important** pour la prise en main de SpringMVC 
+
 c'est un projet qu'on peut faire tourner avec des JSP, mais aussi en API REST
 
 le code équivalent des JSP développé en Angular7 : [coté FontEnd de l'application ](https://github.com/amaryassa/List-ville-Angular)
