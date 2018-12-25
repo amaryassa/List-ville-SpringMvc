@@ -1,6 +1,6 @@
 # List-ville-SpringMvc
 
-* Petit Projet **important** pour la prise en main de SpringMVC 
+* Petit Projet **important** pour la prise en main de **SpringMVC** et **Talend**
 
 c'est un projet qu'on peut faire tourner avec des JSP, mais aussi en API REST
 
