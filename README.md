@@ -22,7 +22,9 @@ importer la base de données dans le **SGBD** de votre choix  qui se trouve au n
  * http://localhost:8080/SpringWeb/
  
 
+## pour le fonctionnement en API REST :
 
+on fait la même démarche
 
 
 ## Exemple d'une page:
